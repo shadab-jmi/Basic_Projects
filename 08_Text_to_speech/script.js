@@ -22,6 +22,9 @@ window.speechSynthesis.onvoiceschanged = () => {
 
 voiceSelect.addEventListener('change', () => {
     speech.voice = voices[voiceSelect.value];
+    window.speechSynthesis.cancel();
+    listenBtn.style.display = 'block';
+    pauseBtn.style.display = 'none';
 })
 
 listenBtn.addEventListener('click', () => {
@@ -30,6 +33,11 @@ listenBtn.addEventListener('click', () => {
     listenBtn.style.display = 'none';
     pauseBtn.style.display = 'block';
 })
+
+speech.onend = () => {
+    listenBtn.style.display = 'block';
+    pauseBtn.style.display = 'none';
+}
 
 pauseBtn.addEventListener('click', () => {
     window.speechSynthesis.cancel();
